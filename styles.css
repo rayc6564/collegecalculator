@@ -1,0 +1,99 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: beige;
+}
+
+main{
+    /* this part allows the item to be move according */
+    display: flex;
+    /* this lets the html know that it will move up and down */
+    flex-direction: column;
+    /* this next 2 lets the html know that everything will be in the center */
+    justify-content: center;
+    align-items: center;
+}
+
+/* move everything away from the header text */
+h1{
+    margin: 20px 0 40px 0;
+}
+
+/* spaces everything out and center them */
+.options{
+
+    font-size: 25px;
+
+    /* the space between element and box */
+    padding: 5px;
+
+    /* the space between element and outside element */
+    margin: 5px;
+
+    /* Set the element's position to relative, allowing it to be positioned relative to its normal position in the document flow */
+    position: relative;
+
+    /* Enable the flexbox layout model on the element, treating its direct children as flex items */
+    display: flex;
+
+    /* Arrange the flex items vertically from top to bottom */
+    flex-direction: column;
+
+    /* Add a 10px gap (space) between each flex item within the flex container */
+    gap: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+button:hover{
+    /* to move the button in */
+    transform: translateY(2px);
+    background-color: blanchedalmond;
+    /* reducing shadow */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    border-color: black;
+    border-radius: 100px;
+    cursor:grab ;
+}
+
+button:active{
+    cursor: grabbing;
+}
+
+button{
+    width: 180px;
+    height: 20px;
+}
+
+.home-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.home-btn i{
+    font-size: 20px;
+}
+
+#new-text{
+    font-family: 'Pacifico', cursive;
+    font-size: 36px;
+    color: #333;
+}
