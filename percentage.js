@@ -134,37 +134,20 @@ addAssignmentBtn.addEventListener("click", () => {
     percentageDiv.appendChild(percentageInput);
     percentageDiv.appendChild(percentageSymbol);
 
-    // Insert the new assignment div after the the assignmentText
+    // Insert the new assignment div after the assignmentText
     assignmentText.insertAdjacentElement("beforeend", percentageDiv);
     assignmentText.insertAdjacentElement("beforeend", assignmentAddBtn);
     assignmentText.insertAdjacentElement("beforeend", deleteBtn);
 
-    deleteBtn.addEventListener("click", function() {
-        percentageDiv.remove();
-        assignmentAddBtn.remove();
-        this.remove();
-        
-        let nextElement = percentageDiv.nextElementSibling;
-        while(nextElement && (nextElement.classList.contains("assignment-grade") || nextElement.classList.contains("add-grades"))){
-            const removeElement = nextElement;
-            nextElement = nextElement.nextElementSibling;
-            removeElement.remove();
-        };
-    });
-
-
-});
-
-document.addEventListener("click", (e) => {
-    if (e.target.matches(".add-grades")) {
+    assignmentAddBtn.addEventListener("click", function() {
         const assignmentGradeDiv = document.createElement("div");
         assignmentGradeDiv.className = "assignment-grade";
 
-        const nameLabel = document.createElement("label");
-        nameLabel.textContent = "Name (Optional): ";
-        const nameInput = document.createElement("input");
-        nameInput.type = "text";
-        nameInput.className = "assignment-grade-name";
+        const gradeNameLabel = document.createElement("label");
+        gradeNameLabel.textContent = "Name (Optional): ";
+        const gradeNameInput = document.createElement("input");
+        gradeNameInput.type = "text";
+        gradeNameInput.className = "assignment-grade-name";
 
         const assignmentInput = document.createElement("input");
         assignmentInput.type = "number";
@@ -178,20 +161,27 @@ document.addEventListener("click", (e) => {
         subDeleteBtn.type = "button";
         subDeleteBtn.className = "sub-delete-btn";
 
-        assignmentGradeDiv.appendChild(nameLabel);
-        assignmentGradeDiv.appendChild(nameInput);
+        assignmentGradeDiv.appendChild(gradeNameLabel);
+        assignmentGradeDiv.appendChild(gradeNameInput);
         assignmentGradeDiv.appendChild(assignmentInput);
         assignmentGradeDiv.appendChild(subDeleteBtn);
 
-        // Insert the new assignment div before the clicked "Add Grades" button
-        e.target.insertAdjacentElement("beforebegin", assignmentGradeDiv);
+        // Insert the new assignment grade div before the clicked "Add Grade" button
+        this.insertAdjacentElement("beforebegin", assignmentGradeDiv);
 
-        subDeleteBtn.addEventListener("click", function(){
+        subDeleteBtn.addEventListener("click", function() {
             assignmentGradeDiv.remove();
-            this.remove();
         });
 
-    };
+        deleteBtn.addEventListener("click", function() {
+            percentageDiv.remove();
+            assignmentAddBtn.remove();
+            this.remove();
+            
+            assignmentGradeDiv.remove();
+            subDeleteBtn.remove();
+        });
+    });
 });
 
 const addOrUpdatePercentageForm = () => {
@@ -379,8 +369,6 @@ if (editFormData) {
                 assignmentGradeDiv.remove();
                 subDeleteBtn.remove();
             });
-
-
 
         });
 
