@@ -5,4 +5,4 @@ This website was build using HTML,CSS, and Javascript and it prioritize localSto
 
 The public website is right [here](https://thecollegecalculator.netlify.app/)
 
-(webpage.png)
+[webpage](webpage.png)
