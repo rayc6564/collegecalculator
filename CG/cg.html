@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cg.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Current Grade Calculator</title>
+</head>
+<body>
+    <main>
+        <h1>Calculator</h1>
+        <div class="home-container">
+            <button class="home-btn"><a href="../index.html"><i class="fas fa-home"></i></a></button>
+        </div>
+        <div class="current-grade-calculator">
+            <form id="cg-form">
+                <div id="choose-container" class="hidden">
+                    <p id="choose-text" class="hidden">Which Grading System</p>
+                    <div class="choose-grading-system hidden">
+                        <button id="point-system-btn" onclick="location.href='../POINT/point.html'" type="button">Points System</button>
+                        <button id="percentage-system-btn" onclick="location.href='../PERCENTAGE/percentage.html'" type="button">Percentage System</button>
+                    </div>
+                </div>
+            </form>
+            <div id="form-container">
+                <!-- holds the forms -->
+            </div>
+            <div id="add-class-btn-container">
+                <button id="add-class-btn" type="button">Add Class</button>
+            </div>
+        </div>
+    </main>
+    <script src="cg.js"></script>
+</body>
+</html>
