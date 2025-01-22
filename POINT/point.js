@@ -100,7 +100,7 @@ noBtn.addEventListener("click", () =>{
 });
 
 yesBtn.addEventListener("click", () =>{
-    location.href = "cg.html";
+    location.href = "../CG/cg.html";
 });
 
 cancelBtn.addEventListener("click", () => {
@@ -121,7 +121,7 @@ cancelBtn.addEventListener("click", () => {
     if(isEmpty && didChange){
         closingDialog.showModal();
     }else{
-        location.href = "cg.html";
+        location.href = "../CG/cg.html";
     }
 });
 
@@ -178,7 +178,7 @@ const addOrUpdatePointsForm = () => {
 
     localStorage.setItem("cgData", JSON.stringify(pointFormData));
     
-    location.href="cg.html";
+    location.href="../CG/cg.html";
 
 
 };
