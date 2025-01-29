@@ -79,9 +79,9 @@ const editForm = (button) => {
     localStorage.setItem("editFormData", JSON.stringify(editFormData));
 
     if(editFormData.system === "points"){
-        location.href = "point.html";
+        location.href = "../POINT/point.html";
     }else if(editFormData.system === "percentage"){
-        location.href = "percentage.html";
+        location.href = "../PERCENTAGE/percentage.html";
     }
 
 };
