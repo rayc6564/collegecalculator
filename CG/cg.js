@@ -2,6 +2,7 @@ const addClassBtn = document.getElementById("add-class-btn");
 const chooseText = document.getElementById("choose-text")
 const chooseGradingSystem = document.querySelector(".choose-grading-system");
 const formContainer = document.getElementById("form-container");
+const deleteAllBtn = document.getElementById("delete-all-btn");
 
 const currentClassCalculator = document.querySelector(".current-class-calculator");
   
@@ -14,11 +15,17 @@ let editFormData = {};
 //     alert("Sorry Work In Process Not Ready");
 // });
 
+deleteAllBtn.addEventListener("click", () => {
+    localStorage.clear();
+    location.reload();
+});
+
 addClassBtn.addEventListener("click", () =>{
     chooseText.classList.remove("hidden");
     chooseGradingSystem.classList.remove("hidden");
     addClassBtn.classList.add("hidden");
     formContainer.classList.add("hidden");
+    deleteAllBtn.classList.add("hidden");
 });
 
 const updatePointFormContainer = () => {
