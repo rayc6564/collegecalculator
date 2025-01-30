@@ -51,15 +51,6 @@ h1 {
     font-size: 20px;
 }
 
-#delete-all-btn {
-    width: 23%;
-    height: auto;
-    position: relative;
-    left: 38.5%;
-    border-radius: 100px;
-    margin-bottom: 10px;
-}
-
 #choose-container{
     display: flex;
     align-items: center;
@@ -89,6 +80,7 @@ h1 {
     display: flex;
     justify-content: center;
     top: 10px;
+    gap: 50px;
 }
 
 #form-container{

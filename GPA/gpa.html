@@ -30,15 +30,19 @@
             </div>
             <div id="add-class-btn" class="">
                 <button id="add-class-gpa" type="button">Add New Class</button>
+                <button id="delete-all-btn" type="button">Delete All</button>
             </div>
             <form id="gpa-form" class="hidden">
                 <div class="gpa-tab">
                     <label for="name-input" class="label-name">Name (Optional)</label>
                     <input type="text" class="name-input" id="name-input" value=""/>
+
                     <label for="credit-hour-input" class="label-name">Credit Hour</label>
-                    <input type="number" class="credit-hour-input" step="0.01" id="credit-hour-input" min="0" required/>
+                    <input type="number" class="credit-hour-input" id="credit-hour-input" min="0" max="10" step="0.01" required/>
+
                     <label for="gpa-input" class="label-name">GPA</label>
-                    <input type="number" class="gpa-input" step="0.01" id="gpa-input" min="0" required/>
+                    <input type="number" class="gpa-input" id="gpa-input" min="0" max="10" step="0.01" required/>
+
                 </div>
                 <div class="gpa-adding-in-btn">
                     <button id="gpa-add-update-btn" type="submit">Add</button>

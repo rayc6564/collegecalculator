@@ -15,11 +15,6 @@ let editFormData = {};
 //     alert("Sorry Work In Process Not Ready");
 // });
 
-deleteAllBtn.addEventListener("click", () => {
-    localStorage.clear();
-    location.reload();
-});
-
 addClassBtn.addEventListener("click", () =>{
     chooseText.classList.remove("hidden");
     chooseGradingSystem.classList.remove("hidden");

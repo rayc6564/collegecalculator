@@ -15,6 +15,7 @@ const confirmClose = document.getElementById("closing-tab-confirm");
 const gpaNoBtn = document.getElementById("gpa-no");
 const gpaYesBtn = document.getElementById("gpa-yes");
 const addUpdateBtn = document.getElementById("gpa-add-update-btn");
+const deleteAllBtn = document.getElementById("delete-all-btn");
 
 
 // add class button
@@ -30,6 +31,10 @@ const formData = JSON.parse(localStorage.getItem("data")) || [];
 
 let currentFormData = {};
 
+deleteAllBtn.addEventListener("click", () => {
+    localStorage.clear();
+    location.reload();
+});
 
 // this is just for organization and reliability
 const addOrUpdateForm = () => {
@@ -147,6 +152,8 @@ const editForm = (button) => {
 
     formContainer.classList.toggle("hidden");
 
+    deleteAllBtn.classList.toggle("hidden");
+
 };
 
 // to reset everything when add class button is pressed after user input
@@ -160,6 +167,7 @@ const reset = () => {
     gpaForm.classList.toggle("hidden");
     addGpaClassBtn.classList.toggle("hidden");
     formContainer.classList.toggle("hidden");
+    deleteAllBtn.classList.toggle("hidden");
 };
 
 if(formData.length){
@@ -174,6 +182,7 @@ addGpaClassBtn.addEventListener("click", () => {
     gpaForm.classList.toggle("hidden");
     addGpaClassBtn.classList.toggle("hidden");
     formContainer.classList.toggle("hidden");
+    deleteAllBtn.classList.toggle("hidden");
 });
 
 gpaCancelBtn.addEventListener("click", () => {
