@@ -23,6 +23,10 @@ addClassBtn.addEventListener("click", () =>{
     deleteAllBtn.classList.add("hidden");
 });
 
+deleteAllBtn.addEventListener("click", () => {
+    localStorage.clear();
+});
+
 const updatePointFormContainer = () => {
     formContainer.innerHTML = "";
 
