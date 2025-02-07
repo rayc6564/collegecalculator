@@ -32,7 +32,10 @@ const formData = JSON.parse(localStorage.getItem("data")) || [];
 let currentFormData = {};
 
 deleteAllBtn.addEventListener("click", () => {
-    localStorage.clear();
+    localStorage.removeItem("data");
+    localStorage.removeItem("creditHours");
+    localStorage.removeItem("gpa");
+    localStorage.removeItem("qp");
     location.reload();
 });
 

@@ -24,7 +24,8 @@ addClassBtn.addEventListener("click", () =>{
 });
 
 deleteAllBtn.addEventListener("click", () => {
-    localStorage.clear();
+    localStorage.removeItem("cgData");
+    location.reload();
 });
 
 const updatePointFormContainer = () => {
