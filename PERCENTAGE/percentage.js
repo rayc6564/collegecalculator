@@ -185,6 +185,7 @@ addAssignmentBtn.addEventListener("click", () => {
 });
 
 const addOrUpdatePercentageForm = () => {
+    let totalWeight = 0;
     let totalPoints = 0;
 
     const assignmentGrades = [];
@@ -213,7 +214,7 @@ const addOrUpdatePercentageForm = () => {
         addGradeHold.forEach(input => {
             const assignmentGradeInput = parseFloat(input.querySelector(".assignment-grade-input").value);
             const assignmentNameInput = input.querySelector(".assignment-grade-name").value;
-            if (!isNaN(assignmentGradeInput)) {
+            if (!isNaN(assignmentGradeInput) && assignmentGradeInput !== "") {
                 count += 1;
                 holdPoints += assignmentGradeInput;
                 assignmentContainer.push({
@@ -223,21 +224,30 @@ const addOrUpdatePercentageForm = () => {
             }
         });
 
-        const averageGrade = holdPoints / count;
-        const weightedAverage = (averageGrade * turnDecimal);
-        totalPoints += weightedAverage;
+        if (count > 0) {
+            const averageGrade = holdPoints / count;
+            const weightedAverage = (averageGrade * turnDecimal);
 
-        assignmentGrades.push({
-            percentageName: percentageNameInput,
-            percentage: percentageInput,
-            assignment: assignmentContainer,
-        });
+            totalPoints += weightedAverage;
+            totalWeight += turnDecimal;
+
+            assignmentGrades.push({
+                percentageName: percentageNameInput,
+                percentage: percentageInput,
+                assignment: assignmentContainer,
+            });
+        }
     });
 
+    // If the "known grade" input is filled out, use that as the total points
     if (!isNaN(parseFloat(knowGradeInput.value))) {
         totalPoints = parseFloat(knowGradeInput.value);
     };
-    
+
+    // this calculates based on graded assignments
+    let finalGrade = totalWeight > 0 ? (totalPoints / totalWeight) : 0;
+    finalGrade = Math.floor(finalGrade * 100) / 100;
+
     const cgFormObj = {
         id: editFormData ? editFormData.id : `${nameInput.value.toLowerCase().split(" ").join("-")}`,
         name: nameInput.value,
@@ -251,7 +261,7 @@ const addOrUpdatePercentageForm = () => {
         gradeDMaxNum: gradeDMaxNum.value,
         gradeFMinNum: gradeFMinNum.value,
         gradeFMaxNum: gradeFMaxNum.value,
-        points: totalPoints,
+        points: finalGrade,
         assignments: assignmentGrades,
         system: "percentage",
     };
