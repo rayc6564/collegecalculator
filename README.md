@@ -6,3 +6,6 @@ This website was build using HTML,CSS, and Javascript and it prioritize localSto
 The public website is right [here](https://thecollegecalculator.netlify.app/)
 
 ![webpage](webpage.png)
+
+
+If you want to use this, download the zip file, extract it, and just open the folder on any ide that supports JS, HTML, and CSS and just run any html file you want.
