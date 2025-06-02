@@ -30,6 +30,18 @@ const percentageFormData = JSON.parse(localStorage.getItem("cgData")) || [];
 
 let editPercentageFormData = {};
 
+function getLetterGrade(score, gradeRanges) {
+    const { A, B, C, D, F } = gradeRanges;
+    score = Math.round(score * 100) / 100;
+
+    if (score >= A.min) return "A";
+    if (score >= B.min) return "B";
+    if (score >= C.min) return "C";
+    if (score >= D.min) return "D";
+    if (score >= F.min) return "F";
+    return "N/A";
+}
+
 knowGradeBtn.addEventListener("click", () => {
     gradePointInput.classList.add("hidden");
     addBtn.classList.add("hidden");
@@ -136,12 +148,17 @@ addAssignmentBtn.addEventListener("click", () => {
     percentageDiv.appendChild(percentageInput);
     percentageDiv.appendChild(percentageSymbol);
 
-    // Insert the new assignment div after the assignmentText
     assignmentText.insertAdjacentElement("beforeend", percentageDiv);
     assignmentText.insertAdjacentElement("beforeend", assignmentAddBtn);
     assignmentText.insertAdjacentElement("beforeend", deleteBtn);
 
-    assignmentAddBtn.addEventListener("click", function() {
+    deleteBtn.addEventListener("click", function () {
+        percentageDiv.remove();
+        assignmentAddBtn.remove();
+        deleteBtn.remove();
+    });
+
+    assignmentAddBtn.addEventListener("click", function () {
         const assignmentGradeDiv = document.createElement("div");
         assignmentGradeDiv.className = "assignment-grade";
 
@@ -168,20 +185,10 @@ addAssignmentBtn.addEventListener("click", () => {
         assignmentGradeDiv.appendChild(assignmentInput);
         assignmentGradeDiv.appendChild(subDeleteBtn);
 
-        // Insert the new assignment grade div before the clicked "Add Grade" button
         this.insertAdjacentElement("beforebegin", assignmentGradeDiv);
 
-        subDeleteBtn.addEventListener("click", function() {
+        subDeleteBtn.addEventListener("click", function () {
             assignmentGradeDiv.remove();
-        });
-
-        deleteBtn.addEventListener("click", function() {
-            percentageDiv.remove();
-            assignmentAddBtn.remove();
-            this.remove();
-            
-            assignmentGradeDiv.remove();
-            subDeleteBtn.remove();
         });
     });
 });
@@ -197,22 +204,14 @@ const addOrUpdatePercentageForm = () => {
     percentageInputDiv.forEach(assignment => {
         const percentageNameInput = assignment.querySelector(".percentage-name-input").value;
         const percentageInput = parseFloat(assignment.querySelector(".percentage-input").value);
+        if (isNaN(percentageInput)) return;
 
-        if (isNaN(percentageInput)) return; // Skip if percentage isn't a number
-
-        const weight = percentageInput / 100; // Convert percentage to decimal (e.g., 20% → 0.20)
-
-        // Find all .assignment-grade elements that are siblings after this assignment
+        const weight = percentageInput / 100;
         let nextSibling = assignment.nextElementSibling;
         const gradeElements = [];
-        while (nextSibling) {
-            if (nextSibling.classList.contains("assignment-grade")) {
-                gradeElements.push(nextSibling);
-            } else if (nextSibling.classList.contains("add-grades") || 
-                      nextSibling.classList.contains("delete-btn")) {
-                // Stop when we hit buttons for this assignment
-                break;
-            }
+
+        while (nextSibling && nextSibling.classList.contains("assignment-grade")) {
+            gradeElements.push(nextSibling);
             nextSibling = nextSibling.nextElementSibling;
         }
 
@@ -223,22 +222,16 @@ const addOrUpdatePercentageForm = () => {
         gradeElements.forEach(gradeElement => {
             const gradeInput = parseFloat(gradeElement.querySelector(".assignment-grade-input").value);
             const gradeNameInput = gradeElement.querySelector(".assignment-grade-name").value;
-            
             if (!isNaN(gradeInput)) {
-                totalAssignmentPoints += gradeInput; // This is already in percentage form (e.g., 85 for 85%)
+                totalAssignmentPoints += gradeInput;
                 totalAssignmentGrades++;
-                assignmentContainer.push({
-                    name: gradeNameInput,
-                    grade: gradeInput,
-                });
+                assignmentContainer.push({ name: gradeNameInput, grade: gradeInput });
             }
         });
 
         if (totalAssignmentGrades > 0) {
             const averageGrade = totalAssignmentPoints / totalAssignmentGrades;
-            // Multiply by weight (which is already in decimal form)
-            const weightedPoints = (averageGrade * weight);
-            
+            const weightedPoints = averageGrade * weight;
             totalWeightedPoints += weightedPoints;
             totalPossibleWeight += weight;
 
@@ -250,22 +243,27 @@ const addOrUpdatePercentageForm = () => {
         }
     });
 
-    // Calculate final grade based on completed assignments only
     let finalGrade = 0;
     if (totalPossibleWeight > 0) {
-        // We don't need to multiply by 100 here because we kept everything in percentage scale
-        finalGrade = (totalWeightedPoints / totalPossibleWeight);
-        // Round to exactly 2 decimal places
+        finalGrade = totalWeightedPoints / totalPossibleWeight;
         finalGrade = Math.round(finalGrade * 100) / 100;
-        // Ensure exactly 2 decimal places (e.g., 62.5 becomes 62.50)
         finalGrade = finalGrade.toFixed(2);
     }
 
-    // If user entered a known grade, use that instead (with proper formatting)
     const knownGradeValue = parseFloat(knowGradeInput.value);
     if (!isNaN(knownGradeValue) && knowGradeInput.value !== "") {
         finalGrade = parseFloat(knownGradeValue).toFixed(2);
     }
+
+    const gradeRanges = {
+        A: { max: parseFloat(gradeAMaxNum.value), min: parseFloat(gradeAMinNum.value) },
+        B: { max: parseFloat(gradeBMaxNum.value), min: parseFloat(gradeBMinNum.value) },
+        C: { max: parseFloat(gradeCMaxNum.value), min: parseFloat(gradeCMinNum.value) },
+        D: { max: parseFloat(gradeDMaxNum.value), min: parseFloat(gradeDMinNum.value) },
+        F: { max: parseFloat(gradeFMaxNum.value), min: parseFloat(gradeFMinNum.value) }
+    };
+
+    const letterGrade = getLetterGrade(parseFloat(finalGrade), gradeRanges);
 
     const cgFormObj = {
         id: editFormData ? editFormData.id : `${nameInput.value.toLowerCase().split(" ").join("-")}`,
@@ -281,6 +279,7 @@ const addOrUpdatePercentageForm = () => {
         gradeFMinNum: gradeFMinNum.value,
         gradeFMaxNum: gradeFMaxNum.value,
         points: finalGrade,
+        letterGrade: letterGrade,
         assignments: assignmentGrades,
         system: "percentage",
     };
