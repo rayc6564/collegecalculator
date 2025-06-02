@@ -45,7 +45,7 @@ const updatePointFormContainer = () => {
 
         let template;
             
-        if (points >= gradeAMinNum) {
+        if (points >= 90 && points <= 100) {
             template = pointsTemplate('A', gradeAMinNum, gradeAMaxNum);
         }else if (points >= gradeBMinNum && points <= gradeBMaxNum) {
             template = pointsTemplate('B', gradeBMinNum, gradeBMaxNum);
