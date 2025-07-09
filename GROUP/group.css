@@ -256,6 +256,20 @@ h1 {
   background-color: #2980b9;
 }
 
+.edit-btn {
+  padding: 6px 12px;
+  background-color: #d3d3d3; /* light grey */
+  color: #222; /* darker text for contrast */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #b0b0b0; /* slightly darker grey on hover */
+}
+
 /* Delete button */
 .delete-btn {
   padding: 6px 12px;
@@ -327,4 +341,101 @@ label[for="checkbox-input"] {
 /* Hidden utility */
 .hidden {
   display: none !important;
+}
+
+
+@media (max-width: 430px) {
+  .app-container {
+    width: 90vw;
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  #addGroupBtn, #deleteAllBtn {
+    width: 100%;
+    font-size: 0.95rem;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .home-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  #new-group-container {
+    width: 90vw;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  #group-name-input {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .group-name-text {
+    font-size: 1.1rem;
+  }
+
+  .next-btn, #add-btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+
+  #groupContainer {
+    grid-template-columns: 1fr;
+    max-height: 40vh;
+    padding: 8px;
+    gap: 12px;
+  }
+
+  .group {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .group h3 {
+    font-size: 1rem;
+  }
+
+  .group .group-stats {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.95rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .open-btn, .delete-btn {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 6px 0;
+  }
+
+  .summary-box {
+    padding: 15px;
+    border-left-width: 4px;
+  }
+
+  .summary-box h2 {
+    font-size: 1.1rem;
+  }
+
+  .summary-box .group-summary {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .summary-box .group-summary p {
+    font-size: 0.95rem;
+  }
 }
