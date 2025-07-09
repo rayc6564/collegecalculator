@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gpa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Include GPA</title>
+</head>
+<body>
+    <main>
+        <h1>Calculator</h1>
+        <div class="home-container">
+            <button class="home-btn"><a href="../../index.html"><i class="fas fa-home"></i></a></button>
+        </div>
+        <div class="gpa-calculator" id="gpa-calculator">
+            <div class="gpa-container">
+                <div>
+                    <p class="credit-hour-text">Credit Hours:</p>
+                    <p id="credit-hour-number">0</p>
+                </div>
+                <div>
+                    <p class="gpa-text">GPA:</p>
+                    <p id="gpa-number">0.00</p>
+                </div>
+                <div>
+                    <p class="qp-text">Quantity Points:</p>
+                    <p id="qp-number">0</p>
+                </div>
+            </div>
+            <div id="add-class-btn" class="">
+                <button id="add-class-gpa" type="button">Add New Class</button>
+                <button id="back-btn" type="button">Finish</button>
+                <button id="delete-all-btn" type="button">Delete All</button>
+            </div>
+            <form id="gpa-form" class="hidden">
+                <div class="gpa-tab">
+                    <label for="name-input" class="label-name">Name (Optional)</label>
+                    <input type="text" class="name-input" id="name-input" value=""/>
+
+                    <label for="credit-hour-input" class="label-name">Credit Hour</label>
+                    <input type="number" class="credit-hour-input" id="credit-hour-input" min="0" max="10" step="0.01" required/>
+
+                    <label for="gpa-input" class="label-name">GPA</label>
+                    <input type="number" class="gpa-input" id="gpa-input" min="0" max="10" step="0.01" required/>
+
+                </div>
+                <div class="gpa-adding-in-btn">
+                    <button id="gpa-add-update-btn" type="submit">Add</button>
+                </div>
+                <div class="gpa-close-btn">
+                    <button id="gpa-cancel-btn" type="button">Cancel</button>
+                </div>
+            </form>
+            <!-- holds the new form user submits -->
+            <div id="form-container"></div>
+        </div>
+        <dialog id="closing-tab-confirm">
+            <form method="dialog">
+                <p class="closing-message">Unsaved Changes</p>
+                <p class="closing-message">Delete?</p>
+                <div class="yes-or-no-btn">
+                    <button id="gpa-yes" type="button" class="dialog-btn">Yes</button>
+                    <button id="gpa-no" type="button" class="dialog-btn">No</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+    <script src="includeGPA.js"></script>
+</body>
+</html>

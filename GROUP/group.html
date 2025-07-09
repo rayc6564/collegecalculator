@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="group.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Group Manager</title>
+</head>
+<body>
+    <div class="home-container">
+        <button class="home-btn"><a href="../../index.html"><i class="fas fa-home"></i></a></button>
+    </div>
+    <div id="modal-overlay" class="hidden"></div>
+    <div class="app-container">
+        <h1>Group Manager</h1>
+        <div class="summary-box">
+            <h2>Include GPA Summary</h2>
+            <div class="group-summary">
+                <p>Credit Hours: <span id="overall-credit">0</span></p>
+                <p>GPA: <span id="overall-gpa">0.00</span></p>
+                <p>QP: <span id="overall-qp">0</span></p>
+            </div>
+        </div>
+
+        <div class="summary-box">
+            <h2>Exclude GPA Summary</h2>
+            <div class="group-summary">
+                <p>Credit Hours: <span id="exclude-credit">0</span></p>
+                <p>GPA: <span id="exclude-gpa">0.00</span></p>
+                <p>QP: <span id="exclude-qp">0</span></p>
+            </div>
+        </div>
+
+        <div class="hidden" id="new-group-container">
+            <h3 class="group-name-text">Group Name</h3>
+            <input id="group-name-input" />
+            <label>
+                <input type="checkbox" id="include-checkbox" /> Include in GPA
+            </label>
+            <label>
+                <input type="checkbox" id="exclude-checkbox" /> Exclude in GPA
+            </label>
+            <button id="add-btn">Add</button>
+        </div>
+        
+        <div id="groupContainer">
+            <!-- Groups will be added here -->
+        </div>
+        <button id="deleteAllBtn">Delete All</button>
+        <button id="addGroupBtn">Add Group</button>
+    </div>
+
+    <script src="group.js"></script>
+</body>
+</html>

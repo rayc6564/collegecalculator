@@ -25,19 +25,33 @@ const creditHourNumber = document.getElementById("credit-hour-number");
 const gpaNumber = document.getElementById("gpa-number");
 const qpNumber = document.getElementById("qp-number");
 
+const backBtn = document.getElementById('back-btn');
+
+// 1. Read groupId from URL
+const params = new URLSearchParams(window.location.search);
+const groupId = params.get("groupId");  // this is the group name
+const include = params.get("include") === "true"; // string -> boolean
+
+// 2. Define storage key per group
+const storageKey = `${include ? "include" : "exclude"}Data_${groupId}`;
 
 // retrieval of data from local storage or an empty array and use it as a string
-const formData = JSON.parse(localStorage.getItem("data")) || [];
+const formData = JSON.parse(localStorage.getItem(storageKey)) || [];
 
 let currentFormData = {};
 
+backBtn.addEventListener('click', () => {
+  window.location.href = '../group.html';
+});
+
 deleteAllBtn.addEventListener("click", () => {
-    localStorage.removeItem("data");
-    localStorage.removeItem("creditHours");
-    localStorage.removeItem("gpa");
-    localStorage.removeItem("qp");
+    localStorage.removeItem(storageKey);
+    localStorage.removeItem(`${include ? "include" : "exclude"}CreditHours_${groupId}`);
+    localStorage.removeItem(`${include ? "include" : "exclude"}Gpa_${groupId}`);
+    localStorage.removeItem(`${include ? "include" : "exclude"}Qp_${groupId}`);
     location.reload();
 });
+
 
 // this is just for organization and reliability
 const addOrUpdateForm = () => {
@@ -62,7 +76,7 @@ const addOrUpdateForm = () => {
         formData[dataArrIndex] = formObj;
     };
 
-    localStorage.setItem("data", JSON.stringify(formData));
+    localStorage.setItem(storageKey, JSON.stringify(formData));
 
     updateFormContainer();
 
@@ -95,9 +109,10 @@ const updateNumber = () => {
     qpNumber.innerText = qpStorage.toFixed(2);
 
     // Store the updated values in localStorage
-    localStorage.setItem('creditHours', JSON.stringify(creditHourStorage));
-    localStorage.setItem('gpa', JSON.stringify(gpaStorage));
-    localStorage.setItem('qp', JSON.stringify(qpStorage));
+    localStorage.setItem(`${include ? "include" : "exclude"}CreditHours_${groupId}`, JSON.stringify(creditHourStorage));
+    localStorage.setItem(`${include ? "include" : "exclude"}Gpa_${groupId}`, JSON.stringify(gpaStorage));
+    localStorage.setItem(`${include ? "include" : "exclude"}Qp_${groupId}`, JSON.stringify(qpStorage));
+
 };
 
 const updateFormContainer = () => {
@@ -129,7 +144,7 @@ const deleteForm = (button) => {
     // 3rd is optional replacement element
     formData.splice(dataArrIndex, 1);
 
-    localStorage.setItem("data", JSON.stringify(formData));
+    localStorage.setItem(storageKey, JSON.stringify(formData));
 
     updateNumber();
 };
@@ -157,6 +172,8 @@ const editForm = (button) => {
 
     deleteAllBtn.classList.toggle("hidden");
 
+    backBtn.classList.toggle("hidden");
+
 };
 
 // to reset everything when add class button is pressed after user input
@@ -171,6 +188,7 @@ const reset = () => {
     addGpaClassBtn.classList.toggle("hidden");
     formContainer.classList.toggle("hidden");
     deleteAllBtn.classList.toggle("hidden");
+    backBtn.classList.toggle("hidden");
 };
 
 if(formData.length){
@@ -186,6 +204,7 @@ addGpaClassBtn.addEventListener("click", () => {
     addGpaClassBtn.classList.toggle("hidden");
     formContainer.classList.toggle("hidden");
     deleteAllBtn.classList.toggle("hidden");
+    backBtn.classList.toggle("hidden");
 });
 
 gpaCancelBtn.addEventListener("click", () => {

@@ -1,0 +1,330 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Home container - centered and positioned above the title */
+.home-container {
+  position: absolute;
+  top: 2%;
+}
+
+/* Circular Home Button */
+.home-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.home-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Remove link styling */
+.home-btn a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Main container */
+.app-container {
+  width: calc(100vw - 96px);
+  max-width: 800px;
+  background-color: lightgrey;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  max-height: 90vh;
+  margin-top: 50px;
+}
+
+/* Title */
+h1 {
+  margin: 0 0 10px 0;
+  color: #222;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+/* Add Group button */
+#addGroupBtn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+#addGroupBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Delete All button */
+#deleteAllBtn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#deleteAllBtn:hover {
+  background-color: #c82333;
+}
+
+/* New group container */
+#new-group-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ccc;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Overlay backdrop behind modal */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+
+#new-group-container.hidden {
+  display: none !important;
+}
+
+/* Group name label */
+.group-name-text {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Group name input */
+#group-name-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.8px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+#group-name-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Checkbox */
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Add (Next) button */
+.next-btn, #add-btn {
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.next-btn:hover, #add-btn:hover {
+  background-color: #1e7e34;
+}
+
+/* Groups container */
+#groupContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  max-height: 30vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  justify-items: center;
+  background-color: #dbe7f4;
+  border-radius: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #3498db #f0f0f0;
+  scroll-behavior: smooth;
+  padding: 10px;
+}
+
+/* Group style */
+.group {
+  width: 100%;
+  max-width: 220px;
+  background-color: lightsteelblue;
+  padding: 12px 14px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.group h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.group .group-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.group span {
+  font-weight: bold;
+  color: #222;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Open button */
+.open-btn {
+  padding: 6px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.open-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Delete button */
+.delete-btn {
+  padding: 6px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Summary box (overall GPA container) */
+.summary-box {
+  background-color: #ffffff;
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #007bff;
+
+  /* Center contents */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Summary title */
+.summary-box h2 {
+  margin: 0 0 12px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.summary-box .group-summary {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 5px;
+  margin: 0;
+}
+
+label[for="checkbox-input"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.summary-box .group-summary p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.group {
+  height: 160px;
+  margin-bottom: 10px;
+}
+
+/* Hidden utility */
+.hidden {
+  display: none !important;
+}

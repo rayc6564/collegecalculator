@@ -45,6 +45,14 @@ main{
     gap: 20px;
 }
 
+.form-holder {
+    border: 2px black;
+    margin-bottom: 10px;
+    background-color: #dbe7f4;;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 #form-container{
     text-align: center;
     margin-top: -260px;
@@ -56,6 +64,10 @@ main{
     width: 40px;
     margin: 5px;
     font-size: 12px;
+}
+
+#back-btn{
+    padding: 1px;
 }
 
 /* move everything away from the header text */
